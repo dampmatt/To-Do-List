@@ -4,5 +4,90 @@
 }
 
 body{
+    display: flex;    
+    min-height: 100vh;
+}
+
+.side-bar{
+    width: min(30vh,10%);
     background-color: #121212;
+    color: #b3b3b3;
+    display: flex;
+    flex-direction: column;
+    gap: 20vh;
+    padding: 20vh 10vh;
+    ul{
+        list-style: none;
+    }
+}
+#range-list,
+#update-list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 1.4em;
+    li{
+        cursor: pointer;
+        width: 15vh;
+        border-radius: 10px;
+        padding: 5% 10%;
+    }
+    li:hover{
+        font-weight: bold;
+        color: white;
+        background-color: #404040;
+    }
+}
+#add-new-div{
+    display: flex;
+    gap: 5px;
+    padding: 5% 15%;
+    border-radius: 10px;
+}
+#add-new-div:hover{
+    cursor: pointer;
+    background-color: white;
+    color: #121212;
+    
+}
+
+
+
+.content{
+    width: 85%;
+    background-color: #181818;
+}
+.header{
+    color: #ffffff;
+    padding: 5vh 10vw;
+    display: flex;
+    gap: 10vw;
+}
+
+#to-do-list{
+    /* background-color: antiquewhite; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 5vh 5vw;
+}
+
+.to-do-items{
+    border-radius: 20px;
+    padding: 20px;  
+    align-items: center;
+    color: #ffffff;
+    font-size: 1.2em;
+    width: 70vw;
+    display: flex;
+    justify-content: space-around;
+    background-color: #404040;
+    h1{
+        min-width: 10%;
+        max-width: 30%;
+    }
+    .description{
+        max-width: 30%;
+        flex-grow: 1;
+    }
 }
