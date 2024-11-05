@@ -1,11 +1,22 @@
 export class toDoItems{
-    constructor(name,subTask=[],description,time){
-        this.name=name;
-        this.subTasks=subTask;
-        this.description= description || `Complete ${this.name} task`;
-        this.deadline=time;
-        this.completed=false;
-        this.id=Date.now();
+
+    constructor(name,subTask,description,time){
+        this.name = name;
+        this.subTasks = subTask ? [subTask] : [];
+        this.description = description || `Complete ${this.name} task`;
+        
+        if (time) {
+            this.deadline = time.slice(0, 10); // YYYY-MM-DD format
+            this.endDay = time.slice(0, 10);
+            this.endTime = time.slice(11); // HH:MM:SS format
+        } else {
+            this.deadline = null;
+            this.endDay = null;
+            this.endTime = null;
+        }
+
+        this.completed = false;
+        this.id = Date.now();
     }
     appendSubTasks(item){
         if (!this.subTasks.includes(item)) {
@@ -35,6 +46,8 @@ export class toDoItems{
             Name: ${this.name}
             Description: ${this.description}
             Deadline: ${this.deadline}
+            endDay: ${this.endDay}
+            DeadTime: ${this.endtime}
             Completed: ${this.completed}
             SubTasks: ${this.subTasks.join(", ")}
         `);
