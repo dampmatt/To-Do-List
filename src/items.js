@@ -1,4 +1,4 @@
-class toDoItems{
+export class toDoItems{
     constructor(name,subTask=[],description,time){
         this.name=name;
         this.subTasks=subTask;
