@@ -19,6 +19,7 @@ const render=(()=>{
     //buttons
     const $addNewDiv =document.querySelector("#add-new-div");
     const $formBtn=document.querySelector("#form-sbt-btn");
+    const $delItemBtn= document.querySelectorAll(".delete-item-btn");
 
     //form-fields
     const $activityName=document.querySelector("#name");
@@ -40,42 +41,41 @@ const render=(()=>{
     $today.addEventListener("click",activateToday);
     $thisWeek.addEventListener("click",activateThisWeek);
     
+    
     function createDiv(obj) {
         var ele = document.createElement("div");
         ele.className = "to-do-items";
         ele.id = obj.id;
     
-        // Create and append the heading
+        
         var heading = document.createElement("h1");
         heading.innerText = obj.name;
         ele.appendChild(heading);
     
-        // Create and append the description paragraph
+        
         var para1 = document.createElement("p");
         para1.className = "description";
         para1.innerText = obj.description;
         ele.appendChild(para1);
     
-        // Create and append the deadline paragraph
+        
         var deadlinePara = document.createElement("p");
         deadlinePara.innerText = obj.endDay + " " + obj.endTime;
         ele.appendChild(deadlinePara);
     
-        // Create and append the trash icon
+        
         var icon = document.createElement("i");
-        icon.classList.add("fa-solid", "fa-trash");
+        icon.classList.add("fa-solid", "fa-trash", "delete-item-btn");
         ele.appendChild(icon);
-    
+
         return ele;
     }
     
 
     function printList(){
         $toDoList.replaceChildren();
-        var currList=toDoList;
         var range=1;
         if(currStatus===$missed){
-            currList=missedList;
             range*=-1;
         }
         if(currDeadline===$thisWeek){
@@ -84,27 +84,40 @@ const render=(()=>{
         const deadlineDate=new Date();
         const dateToday=new Date();
         deadlineDate.setDate(dateToday.getDate() + range);
-        if(currList.length!=0){
+
+        if(toDoList.length!=0 || missedList.length!=0){
             if(currStatus==$missed){
-                while(currList[i].deadline.slice(0, 10)<=dateToday.toISOString().slice(0, 10) && currList[i].deadline.slice(0, 10)>=deadlineDate.toISOString().slice(0, 10)){
-                    var currDiv=createDiv(currList[i]);
-                    $toDoList.appendChild(currDiv);
+                var i=0;
+                while(i< missedList.length){
+                    var itemDeadline=new Date(missedList[i].deadline);
+                    if(itemDeadline<=dateToday && itemDeadline>=deadlineDate){
+                        var currDiv=createDiv(missedList[i]);
+                        $toDoList.appendChild(currDiv);
+                    }
                     i++;
                 }
             }
             
             else{
                 var i=0;
-                console.log(deadlineDate.toISOString().slice(0, 10) );
-                while(i< currList.length && currList[i].deadline.slice(0, 10)>=dateToday.toISOString().slice(0, 10) && currList[i].deadline.slice(0, 10)<=deadlineDate.toISOString().slice(0, 10)){
-                    console.log(i);
-                    var currDiv=createDiv(currList[i]);
-                    console.log(currDiv);
-                    $toDoList.appendChild(currDiv);
+                while(i< toDoList.length){
+                    var itemDeadline=new Date(toDoList[i].deadline);
+                    if(itemDeadline>=dateToday && itemDeadline<=deadlineDate){
+                        var currDiv=createDiv(toDoList[i]);
+                        $toDoList.appendChild(currDiv);
+                    }
+                    else
+                        break;
                     i++;
                 }
             }
         }
+        document.querySelectorAll(".delete-item-btn").forEach(ele => 
+            ele.addEventListener("click", function(event) {
+                const parentId = event.target.parentElement.id;
+                deleteItem(parentId);
+            })
+        );
     }
 
     function checkFormValid(name,deadline){
@@ -118,11 +131,22 @@ const render=(()=>{
         const deadline=$activityDeadline.value;
         const subItem=$activitySubItem.value;
         const desc=$activityDescription.value;
+        const currentDateTime = new Date();
+        const deadlineDateTime = new Date(deadline);
+
+        
         if(checkFormValid(name,deadline)){
             $formdiv.style.display= "none";
-            toDoList.push(new toDoItems(name,subItem,desc,deadline));
-            toDoList.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            if (currentDateTime <= deadlineDateTime) {
+                toDoList.push(new toDoItems(name,subItem,desc,deadline));
+                toDoList.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));    
+            } else {
+                console.log("hello");
+                missedList.push(new toDoItems(name,subItem,desc,deadline));
+                missedList.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            }
             $formdiv.reset();
+            
         }
     }
     
@@ -155,4 +179,23 @@ const render=(()=>{
         printList();
     }  
 
+    function deleteItem(id){
+        var i=0;
+        var x=0;
+        while(x===0 && i<toDoList.length){
+            if(toDoList[i].id==id){
+                toDoList.splice(i,1);
+                x=1;
+            }
+            i++;
+        }
+        while(x===0 && i<missedList.length){
+            if(missedList[i].id==id){
+                missedList.splice(i,1);
+                x=1;
+            }
+            i++;
+        }
+        printList();
+    }
 })()
