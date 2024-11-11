@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/f3ad2d5717.js" crossorigin="anonymous"></script>
+<script defer src="main.js"></script></head>
+<body>
+    <div class="side-bar">
+        <div class="updates">
+            <ul id="update-list">
+                <li id="upcoming">Upcoming</li>
+                <li id="missed">Missed</li>
+            </ul>
+        </div>
+        <div class="range">
+            <ul id="range-list">
+                <li id="Today" class="range-list-item">Today</li>
+                <li id="this-Week" class="range-list-item">This Week</li>
+            </ul>
+        </div>
+        <div id="add-new-div">
+           
+            <i class="fa-solid fa-plus"></i><p>Add new Item</p>
+        </div>
+    </div>
+
+    <div id="content" class="cont">
+        <div id="header">
+            <h1 id="header-status">Upcoming</h1>
+            <h1 id="header-deadline">Today</h1>
+        </div>
+        <div id="to-do-list">
+            <!-- <div class="to-do-items">
+                <h1>It1</h1>
+                <p class="description">Description of Item1</p>
+                <p>1500</p>
+                <i class="fa-solid fa-trash"></i>
+            </div>
+            <div class="to-do-items">
+                <h1>Item</h1>
+                <p class="description">Description of Item2</p>
+                <p>1500</p>
+                <i class="fa-solid fa-trash"></i>
+            </div>
+            <div class="to-do-items">
+                <h1>Item3</h1>
+                <p class="description">Description of Item3</p>
+                <p>1500</p>
+                <i class="fa-solid fa-trash"></i>
+                    
+            </div> -->
+        </div>
+    </div>
+
+    <form id="activity-details">
+        <h1>Activity Details</h1>
+        <div id="activity-name" class="activity-div">
+            <label for="name">Name:</label> 
+            <input type="text" class="activity-input" id="name" required>
+        </div>
+        <div id="activity-date" class="activity-div">
+            <label for="activity-deadline">Activity Date and time:</label> 
+            <input type="datetime-local" class="activity-input" id="activity-deadline" required>
+        </div>
+        <div id="activity-subitem" class="activity-div"> 
+            <label for="subItem">Activity Sub-Task:</label> 
+            <input type="text" class="activity-input" id="subItem">
+        </div>
+        <div id="activity-description" class="activity-div">
+            <label for="description">Activity Description:</label> 
+            <input type="text" aria-rowcount="5" aria-colcount="20" class="activity-input" id="description" >
+        </div>
+        <button type="button" id="form-sbt-btn">submit</button>
+    </form>
+</body>
+</html>
