@@ -8,6 +8,17 @@ body{
     min-height: 100vh;
 }
 
+#show-content-info{
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #181818;
+}
+
+
 .side-bar{
     width: min(30vh,10%);
     background-color: #121212;
@@ -52,7 +63,7 @@ body{
     
 }
 
-#content{
+.cont{
     width: 85%;
     background-color: #181818;
 }
@@ -70,6 +81,9 @@ body{
     gap: 20px;
     padding: 5vh 5vw;
 }
+
+
+
 
 .to-do-items{
     border-radius: 20px;
@@ -89,6 +103,11 @@ body{
         max-width: 30%;
         flex-grow: 1;
     }
+}
+.to-do-items:hover{
+    border-radius: 30px;
+    background-color: #353935;
+      
 }
 
 #activity-details{
@@ -137,4 +156,9 @@ body{
         color: #ffffff;
     }
     display: none;
+}
+
+.delete-item-btn:hover{
+    color: wheat;
+    cursor: pointer;
 }

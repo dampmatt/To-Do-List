@@ -118,6 +118,17 @@ const render=(()=>{
                 deleteItem(parentId);
             })
         );
+        // document.querySelectorAll(".to-do-items").forEach(ele=>{
+        //     ele.addEventListener("click",function (event) {
+        //         const parId=event.target.id;
+        //         const displayDiv=document.createElement("div");
+        //         displayDiv.textContent = `Details for item ID: ${parId}`;
+        //         displayDiv.id="show-content-info";
+        //         document.body.appendChild(displayDiv);
+        //         displayInfo();
+                
+        //     })
+        // })
     }
 
     function checkFormValid(name,deadline){
@@ -154,6 +165,7 @@ const render=(()=>{
         $formdiv.style.display="flex";
         $formBtn.addEventListener("click",submitForm);
     }
+
 
     function activateUpcoming(){
         $headerStatus.textContent="Upcoming";
